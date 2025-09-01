@@ -38,7 +38,11 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
+        config.setAllowedHeaders(List.of(
+                "https://www.visionfundlu.com/",
+                "https://admin.visionfundlu.com/",
+                "https://visionfundlu.com/"
+        ));
         config.setAllowCredentials(true);
         config.setExposedHeaders(List.of("Authorization", "Content-Type"));
 
