@@ -36,14 +36,7 @@ public class SecurityConfig {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of(
-                "https://www.visionfundlu.com/",
-                "https://www.adminpage.com/",
-                "https://visionfundlu.com/",
-                "https://adminpage.com/",
-                "http://127.0.0.1:5500",
-                "http://127.0.0.1:5502"
-        ));
+        config.setAllowedOrigins(List.of("*"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
