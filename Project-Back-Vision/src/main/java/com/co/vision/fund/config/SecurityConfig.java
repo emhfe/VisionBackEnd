@@ -40,7 +40,6 @@ public class SecurityConfig {
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of(
                 "https://www.visionfundlu.com/",
-                "https://admin.visionfundlu.com/",
                 "https://visionfundlu.com/"
         ));
         config.setAllowCredentials(true);
