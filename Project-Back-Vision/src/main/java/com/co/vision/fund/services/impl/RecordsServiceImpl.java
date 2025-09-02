@@ -76,7 +76,7 @@ public class RecordsServiceImpl implements RecordsService {
                 + result.getEmail();
         String affair = "Registration was made with ID: " + result.getId();
 
-        sendEmail(body, affair, "info@visionfundlu.com");
+        //sendEmail(body, affair, "info@visionfundlu.com");
 
         return result;
     }
