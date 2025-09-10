@@ -19,6 +19,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +30,9 @@ public class RecordsServiceImpl implements RecordsService {
     private final CodRecordsRepository codRecordsRepository;
 
     private final FileMetadataService fileMetadataService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JavaMailSender mailSender;
@@ -66,6 +70,11 @@ public class RecordsServiceImpl implements RecordsService {
 
     @Override
     public Records create(final Records record) {
+        if (repository.existsByEmail(record.getEmail())) {
+            throw new IllegalArgumentException("The email is already registered");
+        }
+
+        record.setPassword(passwordEncoder.encode(record.getPassword()));
 
         Records result = repository.save(record);
 
@@ -76,7 +85,7 @@ public class RecordsServiceImpl implements RecordsService {
                 + result.getEmail();
         String affair = "Registration was made with ID: " + result.getId();
 
-        //sendEmail(body, affair, "info@visionfundlu.com");
+        sendEmail(body, affair, "info@visionfundlu.com");
 
         return result;
     }

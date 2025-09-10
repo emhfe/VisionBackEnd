@@ -1,6 +1,5 @@
 package com.co.vision.fund.controllers;
 
-import com.co.vision.fund.dtos.LogIn;
 import com.co.vision.fund.entity.Users;
 import com.co.vision.fund.services.UsersService;
 import java.util.List;
@@ -45,10 +44,5 @@ public class UsersController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         return service.delete(id);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LogIn request) {
-        return service.login(request);
     }
 }

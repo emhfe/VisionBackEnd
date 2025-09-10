@@ -3,6 +3,8 @@ package com.co.vision.fund.controllers;
 import com.co.vision.fund.entity.Records;
 import com.co.vision.fund.services.RecordsService;
 import java.util.List;
+import java.util.Map;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,8 +46,15 @@ public class RecordsController {
     }
 
     @PostMapping
-    public Records create(@RequestBody Records record) {
-        return service.create(record);
+    public ResponseEntity<?> create(@RequestBody Records record) {
+        try {
+            Records nuevo = service.create(record);
+            return ResponseEntity.ok(nuevo);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(Map.of("error", e.getMessage()));
+        }
     }
 
     @DeleteMapping("/{id}")

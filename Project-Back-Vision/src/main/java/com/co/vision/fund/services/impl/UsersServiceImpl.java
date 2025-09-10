@@ -1,7 +1,6 @@
 package com.co.vision.fund.services.impl;
 
 import com.co.vision.fund.Repository.UserRepository;
-import com.co.vision.fund.dtos.LogIn;
 import com.co.vision.fund.entity.Users;
 import com.co.vision.fund.services.UsersService;
 import java.util.List;
@@ -54,17 +53,5 @@ public class UsersServiceImpl implements UsersService {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
-    }
-
-    @Override
-    public ResponseEntity<?> login(LogIn request) {
-        Users user = repository.findByEmail(request.getEmail());
-
-        if (user.getEmail().equals(request.getEmail())
-            && passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-                return ResponseEntity.ok(user);
-            }
-
-        return ResponseEntity.status(401).body("Invalid credentials or user does not exist");
     }
 }

@@ -26,7 +26,11 @@ public class Records {
     private String address;
     private String city;
     private String zip;
+
+    @Column(unique = true)
     private String email;
+
+    private String password;
     private String phone;
     private String birth;
     private List<String> investmentType;
